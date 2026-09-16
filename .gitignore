@@ -4,3 +4,6 @@ dist/
 build/
 coverage/
 .vscode/
+node_modules/
+.env
+server/uploads/

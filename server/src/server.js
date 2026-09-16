@@ -1,0 +1,14 @@
+import express from 'express';
+import cors from 'cors';
+import "dotenv/config";
+import mongoose from 'mongoose';
+import authRoutes from './routes/auth.routes.js';
+import documentRoutes from './routes/document.routes.js'; 
+import chatRoutes from './routes/chat.routes.js';
+const app = express(); 
+app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173' })); 
+app.use(express.json({ limit: '2mb' }));
+app.get('/api/health', (_, res) => res.json({ ok: true, service: 'LegalEase API' })); 
+app.use('/api/auth', authRoutes); app.use('/api/documents', documentRoutes); 
+app.use('/api/chat', chatRoutes);
+const port = process.env.PORT || 5000; mongoose.connect(process.env.MONGO_URI).then(() => app.listen(port, () => console.log('LegalEase API on ' + port))).catch(e => { console.error(e.message); process.exit(1) });

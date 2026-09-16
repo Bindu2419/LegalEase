@@ -1,0 +1,1 @@
+import mongoose from 'mongoose'; const s=new mongoose.Schema({name:{type:String,required:true},email:{type:String,required:true,unique:true,lowercase:true},passwordHash:{type:String,required:true},preferredLanguage:{type:String,default:'English'}},{timestamps:true}); export default mongoose.model('User',s);
